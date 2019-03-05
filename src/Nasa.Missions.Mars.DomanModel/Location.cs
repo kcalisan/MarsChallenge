@@ -10,8 +10,9 @@ namespace Nasa.Missions.Mars.DomaninModel
         {
             this.Point = point;
             this.CardinalDirection = cardinalDirection;
+            ThrowIfInvalidLocation();
 
-            cardinalDirections = new Dictionary<CardinalDirection, char>
+            cardinalDirectionsMapper = new Dictionary<CardinalDirection, char>
                 {
                     {CardinalDirection.North, 'N'},
                     {CardinalDirection.East, 'E'},
@@ -20,8 +21,20 @@ namespace Nasa.Missions.Mars.DomaninModel
                 };
         }
 
+        private void ThrowIfInvalidLocation()
+        {
+            if (Point.XCoordinate < 0 || Point.YCoordinate < 0)
+                throw new ArgumentOutOfRangeException();
+        }
+
+
         public Point Point { get; set; }
         public CardinalDirection CardinalDirection { get; set; }
-        private readonly Dictionary<CardinalDirection, char> cardinalDirections;
+        private readonly Dictionary<CardinalDirection, char> cardinalDirectionsMapper;
+
+        public override string ToString()
+        {
+            return string.Format("{0} {1} {2}", Point.XCoordinate, Point.YCoordinate, cardinalDirectionsMapper[CardinalDirection]);
+        }
     }
 }

@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Nasa.Missions.Mars.DomaninModel
 {
+    /// <summary>
+    /// Represents cardinal compass direction of rover.
+    /// </summary>
     public enum CardinalDirection
     {
         West,
